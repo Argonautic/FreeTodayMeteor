@@ -31,9 +31,9 @@ class Header extends Component {
             return (
                 <Menu.Menu position="right">
                     <Menu.Item>
-                        <Dropdown text={this.props.currentUser.profile.name}>
+                        <Dropdown text={this.props.userName}>
                             <Dropdown.Menu>
-                                <Dropdown.Item text="Logout" onClick={Meteor.logout} />
+                                <Dropdown.Item text="Logout" onClick={this.logout} />
                             </Dropdown.Menu>
                         </Dropdown>
                     </Menu.Item>
@@ -62,6 +62,14 @@ class Header extends Component {
         });
     }
 
+    logout() {
+        Meteor.logout((error) => {
+            if (error) {
+                console.log(error);
+            }
+        });
+    }
+
     render() {
         return (
             <Menu inverted fixed="top">
@@ -77,7 +85,11 @@ class Header extends Component {
 }
 
 export default withTracker(() => {
+    const currentUser = Meteor.user();
+    const userName = currentUser && currentUser.profile.name;
+
     return {
-        currentUser: Meteor.user()
+        currentUser,
+        userName
     };
 })(Header);

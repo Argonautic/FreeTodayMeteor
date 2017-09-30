@@ -29,3 +29,5 @@ accounts-base
 accounts-password
 aldeed:collection2
 check
+mdg:geolocation
+mdg:validated-method
