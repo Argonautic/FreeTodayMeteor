@@ -119,7 +119,6 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/stream_tests.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/namespace.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/mdg_geolocation/1.3.0/web.browser/geolocation.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/accounts-base/1.3.3/web.browser/accounts_server.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-utility.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/check/1.2.5/web.browser/match.js" />
@@ -129,10 +128,8 @@
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/check/1.2.5/web.browser/isPlainObject.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/stream_client_nodejs.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/callback-hook/1.0.10/web.browser/hook.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-index/1.1.1/web.browser/lib/indexing.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/id_map.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/tmeasday_check-npm-versions/0.2.0/web.browser/check-npm-versions.js" />
-        <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-deny/1.1.0/web.browser/lib/deny.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/templating-runtime/1.3.2/web.browser/templating.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/google-oauth/1.2.4/web.browser/namespace.js" />
         <item url="file://$USER_HOME$/AppData/Local/.meteor/packages/google-oauth/1.2.4/web.browser/google_client.js" />
@@ -346,7 +343,6 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/stream_tests.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/namespace.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/mdg_geolocation/1.3.0/web.browser/geolocation.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/accounts-base/1.3.3/web.browser/accounts_server.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_simple-schema/1.5.3/web.browser/simple-schema-utility.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/check/1.2.5/web.browser/match.js" />
@@ -356,10 +352,8 @@
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/check/1.2.5/web.browser/isPlainObject.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/stream_client_nodejs.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/callback-hook/1.0.10/web.browser/hook.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-index/1.1.1/web.browser/lib/indexing.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/ddp-client/2.1.3/web.browser/id_map.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/tmeasday_check-npm-versions/0.2.0/web.browser/check-npm-versions.js" />
-      <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/aldeed_schema-deny/1.1.0/web.browser/lib/deny.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/templating-runtime/1.3.2/web.browser/templating.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/google-oauth/1.2.4/web.browser/namespace.js" />
       <root url="file://$USER_HOME$/AppData/Local/.meteor/packages/google-oauth/1.2.4/web.browser/google_client.js" />

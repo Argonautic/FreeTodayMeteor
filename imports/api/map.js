@@ -23,7 +23,7 @@ Meteor.methods({
             console.log('no navigator.geolocation');
         }
     }
-})
+});
 
 /*export const getLocation = new ValidatedMethod({
     name: 'getLocation',

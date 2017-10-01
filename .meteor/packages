@@ -27,7 +27,7 @@ service-configuration
 email
 accounts-base
 accounts-password
-aldeed:collection2
+aldeed:collection2-core
 check
-mdg:geolocation
 mdg:validated-method
+aldeed:simple-schema
