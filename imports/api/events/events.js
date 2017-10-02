@@ -1,26 +1,30 @@
-import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-import eventSchema from './eventSchema';
+import eventSchema from '../schemas/eventSchema';
 
-const Events = new Mongo.Collection('events');
+Events = new Mongo.Collection('events');
 Events.attachSchema(eventSchema);
 
 Meteor.methods({
-    submitNewEvent() {
-        return `${this.userId}`;
+    'testInsert'() {
+        Events.insert({
+            eventName: "A name",
+            eventDescription: "A desc",
+            eventPosition: {lat: 100, lng: -70},
+        });
     }
 });
 
-export const submitNewEvent2 = new ValidatedMethod({
-    name: 'submitNewEvent2',
+
+export const submitNewEvent = new ValidatedMethod({
+    name: 'submitNewEvent',
     validate: eventSchema.validator(),
-    run({eventName, eventDescription, eventPosition}) {
-        Events.insert({
-            owner: this.userId,
-            name: eventName,
-            description: eventDescription,
-            position: eventPosition
-        });
+    run(newEvent) {
+        if (!this.userId) {
+            throw new Meteor.Error('You must be logged in to create an event, you sly devil');
+        } else {
+            newEvent.owner = this.userId;
+        }
+        Events.insert(newEvent);
     }
 });

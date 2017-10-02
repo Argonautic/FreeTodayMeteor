@@ -1,12 +1,13 @@
-import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import NewEventForm from './subcomponents/newEventForm';
+//import { Events } from '../../../api/events/events';
+import { submitNewEvent } from '../../../api/events/events';
 
 import '/public/style/map.css';
 
-class MapComponent extends Component {
+export default class MapComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -17,6 +18,7 @@ class MapComponent extends Component {
         this.moveNewEventWindow = this.moveNewEventWindow.bind(this);
         this.createNewEventWindow = this.createNewEventWindow.bind(this);
         this.newEventSubmitted = this.newEventSubmitted.bind(this);
+        this.renderMarkers = this.renderMarkers.bind(this);
     }
 
     moveNewEventWindow(event) {
@@ -43,18 +45,26 @@ class MapComponent extends Component {
     }
 
     newEventSubmitted(eventName, eventDescription) {
-        console.log(eventName);
-        console.log(eventDescription);
+        const newEvent = {
+            eventName: eventName,
+            eventDescription: eventDescription,
+            eventPosition: this.state.newEventPos,
+        };
 
-        Meteor.call('submitNewEvent', (err, res) => {
+        submitNewEvent.validate(newEvent);
+        submitNewEvent.call(newEvent, (err) => {
             if (err) {
                 console.log(`ERROR(${err.code}): ${err.message}`)
             } else {
-                console.log(res);
+                console.log('success!');
             }
         });
 
         this.newEventWindow.close();
+    }
+
+    renderMarkers() {
+        console.log(this.props.myEvents)
     }
 
     componentDidMount() {
@@ -65,12 +75,14 @@ class MapComponent extends Component {
             center: this.props.center || {lat: 40.760262, lng: -73.919362}
         });
 
-        const marker = new google.maps.Marker({
+        /*const marker = new google.maps.Marker({
             position: center,
             map: this.map
-        });
+        });*/
 
         this.createNewEventWindow();
+        this.renderMarkers();
+
         this.map.addListener('rightclick', this.moveNewEventWindow);
     }
 
@@ -81,13 +93,14 @@ class MapComponent extends Component {
     }
 }
 
-
-export default trackedMap = withTracker(() => {
+/*export default trackedMap = withTracker(() => {
+    const handle = Meteor.subscribe('events.my-events');
+    console.log(handle);
     const currentUser = Meteor.user();
-    const userName = currentUser && currentUser.profile.name;
 
     return {
+        ready: handle.ready(),
+        myEvents: Events.find({}).fetch(),
         currentUser,
-        userName
     };
-})(MapComponent);
+})(MapComponent);*/
