@@ -1,4 +1,5 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import SimpleSchema from 'simpl-schema';
 
 import eventSchema from '../schemas/eventSchema';
 
@@ -25,6 +26,29 @@ export const submitNewEvent = new ValidatedMethod({
         } else {
             newEvent.owner = this.userId;
         }
+
         Events.insert(newEvent);
+    }
+});
+
+export const deleteEvent = new ValidatedMethod({
+    name: 'deleteEvent',
+    validate: function(eventId) {
+        event = Events.findOne(eventId);
+
+        if (!event) {
+            throw new Meteor.Error('Event ID not found')
+        } else if (event.owner !== this.userId) {
+            throw new Meteor.Error("This isn't your event");
+        }
+    },
+    run(eventId) {
+        if (!event) {
+            throw new Meteor.Error('Event ID not found')
+        } else if (event.owner !== this.userId) {
+            throw new Meteor.Error("This isn't your event");
+        }
+
+        Events.remove({ '_id': eventId });
     }
 });

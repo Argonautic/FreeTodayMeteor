@@ -28,6 +28,11 @@ export default class NewEventForm extends Component {
 
     onSubmit() {
         this.props.newEventSubmitted(this.state.eventName, this.state.eventDescription);
+
+        this.setState({
+            eventName: '',
+            eventDescription: ''
+        })
     }
 
     render() {
