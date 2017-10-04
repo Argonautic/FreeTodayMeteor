@@ -12,7 +12,7 @@ class Map extends Component {
         super(props);
 
         this.state = {
-            center: { lat: 40.760262, lng: -73.919362 }
+            center: {lat: 40.7604247, lng: -73.9178987}
         }
     }
 

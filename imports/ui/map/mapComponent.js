@@ -97,7 +97,7 @@ export default class MapComponent extends Component {
     componentDidMount() {
         this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
-            center: this.props.center || {lat: 40.760262, lng: -73.919362}
+            center: this.props.center
         });
 
         this.constructEventWindow();
