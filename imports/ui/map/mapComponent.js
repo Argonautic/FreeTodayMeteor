@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import NewEventForm from './subcomponents/newEventForm';
-import EventMarker from './subcomponents/eventMarker';
-import { submitNewEvent } from '../../api/events/events';
-import { deleteEvent } from '../../api/events/events';
+import ViewEvent from './subcomponents/viewEvent';
 
 import '/public/style/mapComponent.css';
 
@@ -12,77 +10,87 @@ export default class MapComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            center: this.props.center
-        };
+        this.markers = [];
 
-        this.moveNewEventWindow = this.moveNewEventWindow.bind(this);
+        this.constructEventWindow = this.constructEventWindow.bind(this);
         this.createNewEventWindow = this.createNewEventWindow.bind(this);
+
         this.newEventSubmitted = this.newEventSubmitted.bind(this);
+        this.eventUpdatedOrDeleted = this.eventUpdatedOrDeleted.bind(this);
+
         this.renderEventMarkers = this.renderEventMarkers.bind(this);
     }
 
 
-    createNewEventWindow() {
-        this.detachedDOM = document.createElement('div');
-        this.newEventWindow = new google.maps.InfoWindow({ content: this.detachedDOM });
-
-        const newEventForm = <NewEventForm newEventSubmitted={this.newEventSubmitted}/>;
-        render(newEventForm, this.detachedDOM);
+    constructEventWindow() {
+        this.eventDOM = document.createElement('div');
+        this.eventWindow = new google.maps.InfoWindow({ content: this.eventDOM });
     }
 
-    moveNewEventWindow(event) {
-        if (!this.props.currentUser) {
-            render(<h3>Login to make a new Event!</h3>, this.detachedDOM);
-        }
-
-        this.eventCenter = {
+    createNewEventWindow(event) {
+        eventPosition = {
             lat: event.latLng.lat(),
             lng: event.latLng.lng()
         };
 
-        this.newEventWindow.setPosition(this.eventCenter);
-        this.newEventWindow.open(this.map);
+        const newEventForm = this.props.currentUser ?
+            <NewEventForm eventPosition={eventPosition} newEventSubmitted={this.newEventSubmitted}/> :
+            <h3>Login to make a new Event!</h3>;
+        render(newEventForm, this.eventDOM);
+
+        this.eventWindow.setPosition(eventPosition);
+        this.eventWindow.open(this.map);
     }
 
-    newEventSubmitted(eventName, eventDescription) {
-        const newEvent = {
-            eventName: eventName,
-            eventDescription: eventDescription,
-            eventPosition: this.eventCenter
-        };
-
-        submitNewEvent.call(newEvent, (err) => {
-            if (err) {
-                console.log(`ERROR(${err.code}): ${err.message}`)
-            } else {
-                console.log('success!');
-            }
-        });
-
-        this.newEventWindow.close();
+    newEventSubmitted() {
+        this.eventWindow.close();
     }
 
+
+    eventUpdatedOrDeleted() {
+        this.eventWindow.close();
+    }
 
     renderEventMarkers() {
-        this.props.allEvents.forEach(event => {
-            let marker = new google.maps.Marker({
-                map: this.map,
-                position: event.eventPosition,
-                title: event.eventName,
-                icon: event.owner === this.props.currentUser._id ? '/images/gold-marker-15.svg' : '/images/green-marker-15.svg',
+        //unsure if this part is necessary
+        this.markers.forEach(marker => {
+            marker.setMap(null);
+            google.maps.event.clearListeners(marker, 'click');
+        });
+        this.markers = [];
+
+        if (this.map.getZoom() > 10) {
+            this.props.allEvents.forEach(event => {
+                let marker = new google.maps.Marker({
+                    map: this.map,
+                    position: event.eventPosition,
+                    title: event.eventName,
+                    icon: this.props.currentUser && event.owner === this.props.currentUser._id ?
+                        '/images/gold-marker-15.svg' :
+                        '/images/green-marker-15.svg',
+                });
+
+                //Do these listeners persist across re-renders?
+                marker.addListener('click', () => {
+                    let viewEventForm = <ViewEvent
+                        marker={marker}
+                        event={event}
+                        currentUser={this.props.currentUser}
+                        eventUpdatedOrDeleted={this.eventUpdatedOrDeleted}
+                    />;
+                    render(viewEventForm, this.eventDOM);
+
+                    this.eventWindow.setPosition(event.eventPosition);
+                    this.eventWindow.open(this.map);
+                });
+                this.markers.push(marker);
             });
 
-            //Do these listeners persist across re-renders?
-            marker.addListener('click', () => {
-                deleteEvent.call(event._id);
-                marker.setMap(null);
-            })
-        });
+            console.log('markers rendered!');
+        }
     }
 
     componentDidUpdate() {
-        console.log('component updated');
         this.renderEventMarkers();
     }
 
@@ -92,11 +100,12 @@ export default class MapComponent extends Component {
             center: this.props.center || {lat: 40.760262, lng: -73.919362}
         });
 
-        this.createNewEventWindow();
+        this.constructEventWindow();
         this.renderEventMarkers();
 
-        this.map.addListener('rightclick', this.moveNewEventWindow);
+        this.map.addListener('rightclick', this.createNewEventWindow);
         this.map.addListener('dragend', this.renderEventMarkers);
+        this.map.addListener('zoom_changed', this.renderEventMarkers);
     }
 
     render() {
