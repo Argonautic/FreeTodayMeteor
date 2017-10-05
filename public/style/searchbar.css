@@ -1,0 +1,6 @@
+#searchbar {
+    top: 48.667px;
+    z-index: 10;
+    width: 100%;
+    position: fixed;
+}

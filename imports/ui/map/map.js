@@ -3,6 +3,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component, Marker } from 'react';
 import { Loader } from 'semantic-ui-react';
 
+import Searchbar from './searchbar';
 import MapComponent from './mapComponent';
 
 import '/public/style/map';
@@ -21,6 +22,7 @@ class Map extends Component {
             !this.props.ready ? <Loader id="loader" active inline="centered"/> :
 
             <div>
+                <div id="map" />
                 <MapComponent
                     allEvents={this.props.allEvents}
                     currentUser={this.props.currentUser}

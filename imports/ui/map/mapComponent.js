@@ -94,7 +94,9 @@ export default class MapComponent extends Component {
         this.renderEventMarkers();
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        console.log('the map element is:' + document.getElementById('map'));
+
         this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: this.props.center
@@ -110,7 +112,7 @@ export default class MapComponent extends Component {
 
     render() {
         return (
-            <div id="map" />
+            <div />
         );
     }
 }
