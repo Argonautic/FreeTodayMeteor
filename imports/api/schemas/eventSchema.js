@@ -1,6 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 
-import positionSchema from './positionSchema';
+import locationSchema from './locationSchema';
 
 export default eventSchema = new SimpleSchema({
     owner: {
@@ -17,5 +17,5 @@ export default eventSchema = new SimpleSchema({
         max: 500,
         optional: true
     },
-    eventPosition: positionSchema
+    eventLocation: locationSchema
 });
