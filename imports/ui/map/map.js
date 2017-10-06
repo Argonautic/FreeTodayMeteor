@@ -14,10 +14,11 @@ class Map extends Component {
 
         this.state = {
             center: {lat: 40.7604247, lng: -73.9178987}
-        }
+        };
     }
 
     render() {
+        console.log('render');
         return (
             !this.props.ready ? <Loader id="loader" active inline="centered"/> :
 

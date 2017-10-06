@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import NewEventForm from './subcomponents/newEventForm';
 import ViewEvent from './subcomponents/viewEvent';
+import { getMap } from '../redux/actions/index';
 
 import '/public/style/mapComponent.css';
 
-export default class MapComponent extends Component {
+class MapComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -94,13 +97,12 @@ export default class MapComponent extends Component {
         this.renderEventMarkers();
     }
 
-    componentWillMount() {
-        console.log('the map element is:' + document.getElementById('map'));
-
+    componentDidMount() {
         this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: this.props.center
         });
+        this.props.getMap(this.map);
 
         this.constructEventWindow();
         this.renderEventMarkers();
@@ -116,3 +118,13 @@ export default class MapComponent extends Component {
         );
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ getMap }, dispatch);
+}
+
+function mapStateToProps({ map }) {
+    return { map };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
