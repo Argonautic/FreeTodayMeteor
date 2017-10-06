@@ -3,7 +3,7 @@
     left: 50%;
 }
 
-#map {
+#mapContainer {
     height: 100vh;
     width: 100vw;
 }

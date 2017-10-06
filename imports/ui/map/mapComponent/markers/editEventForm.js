@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 
-import { deleteEvent } from '../../../api/events/events';
-import { updateEvent } from '../../../api/events/events';
+import { deleteEvent } from '../../../../api/events/events';
+import { updateEvent } from '../../../../api/events/events';
 
 export default class EditEventForm extends Component {
     constructor(props) {

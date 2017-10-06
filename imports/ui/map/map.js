@@ -1,14 +1,11 @@
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import React, { Component, Marker } from 'react';
-import { Loader } from 'semantic-ui-react';
+import React, { Component } from 'react';
 
 import Searchbar from './searchbar';
-import MapComponent from './mapComponent';
+import MapComponent from './mapComponent/mapComponent';
 
 import '/public/style/map';
 
-class Map extends Component {
+export default class Map extends Component {
     constructor(props) {
         super(props);
 
@@ -18,29 +15,17 @@ class Map extends Component {
     }
 
     render() {
-        console.log('render');
+        console.log('Map rendered');
         return (
-            !this.props.ready ? <Loader id="loader" active inline="centered"/> :
-
             <div>
-                <div id="map" />
+                <div id="mapContainer" />
                 <MapComponent
                     allEvents={this.props.allEvents}
                     currentUser={this.props.currentUser}
                     center={this.state.center}
                 />
+                <Searchbar />
             </div>
         );
     }
 }
-
-export default trackedMap = withTracker(() => {
-    const handle = Meteor.subscribe('events.all-public-events');
-    const currentUser = Meteor.user();
-
-    return {
-        ready: handle.ready(),
-        allEvents: Events.find({}).fetch(),
-        currentUser,
-    };
-})(Map);

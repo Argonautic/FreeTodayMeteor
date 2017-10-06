@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 
-import { submitNewEvent } from '../../../api/events/events';
+import { submitNewEvent } from '../../../../api/events/events';
 
 export default class NewEventForm extends Component {
     constructor(props) {

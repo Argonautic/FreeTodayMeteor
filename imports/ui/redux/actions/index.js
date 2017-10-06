@@ -1,8 +1,8 @@
-export const GET_MAP = 'GET_MAP';
+export const PUSH_MAP = 'PUSH_MAP';
 
-export function getMap(map) {
+export function pushMap(map) {
     return {
-        type: GET_MAP,
+        type: PUSH_MAP,
         payload: map,
     };
 }
