@@ -29,10 +29,17 @@ export default class NewEventForm extends Component {
     }
 
     onSubmit() {
+        const coordinates = [this.props.eventLocation.lng, this.props.eventLocation.lat];
+        console.log(coordinates);
+
         const newEvent = {
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
-            eventPosition: this.props.eventPosition
+            eventLocation: {
+                location: {
+                    coordinates
+                }
+            }
         };
 
         submitNewEvent.call(newEvent, (err) => {

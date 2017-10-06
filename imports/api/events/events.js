@@ -5,16 +5,9 @@ import eventSchema from '../schemas/eventSchema';
 
 Events = new Mongo.Collection('events');
 Events.attachSchema(eventSchema);
-Events._ensureIndex({ 'eventLocation.location': "2dsphere" });
 
 Meteor.methods({
-    'testInsert'() {
-        Events.insert({
-            eventName: "A name",
-            eventDescription: "A desc",
-            eventPosition: {lat: 100, lng: -70},
-        });
-    }
+
 });
 
 

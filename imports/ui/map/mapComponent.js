@@ -31,17 +31,17 @@ class MapComponent extends Component {
     }
 
     createNewEventWindow(event) {
-        eventPosition = {
+        eventLocation = {
             lat: event.latLng.lat(),
             lng: event.latLng.lng()
         };
 
         const newEventForm = this.props.currentUser ?
-            <NewEventForm eventPosition={eventPosition} newEventSubmitted={this.newEventSubmitted}/> :
+            <NewEventForm eventLocation={eventLocation} newEventSubmitted={this.newEventSubmitted}/> :
             <h3>Login to make a new Event!</h3>;
         render(newEventForm, this.eventDOM);
 
-        this.eventWindow.setPosition(eventPosition);
+        this.eventWindow.setPosition(eventLocation);
         this.eventWindow.open(this.map);
     }
 
@@ -64,9 +64,13 @@ class MapComponent extends Component {
 
         if (this.map.getZoom() > 10) {
             this.props.allEvents.forEach(event => {
+                //Convert GeoJSON to google maps format LatLng
+                let coordinates = event.eventLocation.location.coordinates;
+                let latLng = new google.maps.LatLng(coordinates[1], coordinates[0]);
+
                 let marker = new google.maps.Marker({
                     map: this.map,
-                    position: event.eventPosition,
+                    position: latLng,
                     title: event.eventName,
                     icon: this.props.currentUser && event.owner === this.props.currentUser._id ?
                         '/images/gold-marker-15.svg' :
@@ -83,13 +87,11 @@ class MapComponent extends Component {
                     />;
                     render(viewEventForm, this.eventDOM);
 
-                    this.eventWindow.setPosition(event.eventPosition);
+                    this.eventWindow.setPosition(latLng);
                     this.eventWindow.open(this.map);
                 });
                 this.markers.push(marker);
             });
-
-            console.log('markers rendered!');
         }
     }
 
@@ -108,8 +110,6 @@ class MapComponent extends Component {
         this.renderEventMarkers();
 
         this.map.addListener('rightclick', this.createNewEventWindow);
-        this.map.addListener('dragend', this.renderEventMarkers);
-        this.map.addListener('zoom_changed', this.renderEventMarkers);
     }
 
     render() {
