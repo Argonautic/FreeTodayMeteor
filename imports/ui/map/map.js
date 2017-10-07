@@ -17,7 +17,7 @@ export default class Map extends Component {
     render() {
         console.log('Map rendered');
         return (
-            <div>
+            <div id="mapCSSWrapper">
                 <div id="mapContainer" />
                 <MapComponent
                     allEvents={this.props.allEvents}

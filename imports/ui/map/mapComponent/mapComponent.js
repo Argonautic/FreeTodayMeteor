@@ -22,9 +22,11 @@ class MapComponent extends Component {
     }
 
     componentDidMount() {
+        console.log('mapComponent did mount');
         this.map = new google.maps.Map(document.getElementById('mapContainer'), {
             zoom: 15,
-            center: this.props.center
+            center: this.props.center,
+            disableDefaultUI: true
         });
         this.props.pushMap(this.map);
 
@@ -48,8 +50,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ pushMap }, dispatch);
 }
 
-function mapStateToProps({ map }) {
-    return { map };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);
+export default connect(null, mapDispatchToProps)(MapComponent);
