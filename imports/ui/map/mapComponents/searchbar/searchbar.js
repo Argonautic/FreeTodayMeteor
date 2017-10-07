@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { pushCoordinates } from '../redux/actions/index';
 
 import '/public/style/searchbar.css';
 
-class Searchbar extends Component {
+export default class Searchbar extends Component {
     constructor(props) {
         super(props);
 
     }
 
-    componentWillReceiveProps(nextProps) {
-        map = nextProps.map;
+    componentDidMount() {
+        map = this.props.map;
 
         const input = document.getElementById('searchTextField');
         const searchBox = new google.maps.places.SearchBox(input);
@@ -29,7 +26,7 @@ class Searchbar extends Component {
             lng = coordinateData.lng();
 
             map.setCenter({lat, lng});
-            this.props.pushCoordinates([lng, lat]);
+            this.props.changeMapCenter([lng, lat]);
         });
     }
 
@@ -43,13 +40,3 @@ class Searchbar extends Component {
         )
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ pushCoordinates }, dispatch);
-}
-
-function mapStateToProps({ coordinates }) {
-    return { coordinates };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);

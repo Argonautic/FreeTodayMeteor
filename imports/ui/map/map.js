@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-import Searchbar from './searchbar';
-import MapComponent from './mapComponent/mapComponent';
+import MapComponents from './mapComponents/mapComponents'
 
 import '/public/style/map';
 
@@ -9,22 +9,38 @@ export default class Map extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            center: {lat: 40.7604247, lng: -73.9178987}
-        };
+        this.constructEventWindow = this.constructEventWindow.bind(this);
+    }
+
+    constructEventWindow() {
+        this.eventDOM = document.createElement('div');
+        this.eventWindow = new google.maps.InfoWindow({ content: this.eventDOM });
+    }
+
+    componentDidMount() {
+        this.map = new google.maps.Map(document.getElementById('mapContainer'), {
+            zoom: 15,
+            center: {lat: 40.7604247, lng: -73.9178987},
+            disableDefaultUI: true
+        });
+
+        this.constructEventWindow();
+
+        render(
+            <div>
+                <MapComponents
+                    map={this.map}
+                    eventDOM={this.eventDOM}
+                    eventWindow={this.eventWindow} />
+                </div>
+            , document.getElementById('mapFinished'));
     }
 
     render() {
-        console.log('Map rendered');
         return (
             <div id="mapCSSWrapper">
                 <div id="mapContainer" />
-                <MapComponent
-                    allEvents={this.props.allEvents}
-                    currentUser={this.props.currentUser}
-                    center={this.state.center}
-                />
-                <Searchbar />
+                <div id="mapFinished" />
             </div>
         );
     }

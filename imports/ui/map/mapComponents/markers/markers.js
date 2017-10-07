@@ -1,14 +1,11 @@
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { appStore } from '../../../../../client/main';
 
 import ViewEvent from './viewEvent';
 
 class Markers extends Component {
     constructor(props) {
         super(props);
-        console.log(document.getElementById('store'));
 
         this.markers = [];
 
@@ -63,7 +60,7 @@ class Markers extends Component {
     }
 }
 
-const trackedMarkers = withTracker((props) => {
+export default withTracker((props) => {
     console.log(props);
     const handle = Meteor.subscribe('events.all-public-events');
     const currentUser = Meteor.user();
@@ -74,19 +71,3 @@ const trackedMarkers = withTracker((props) => {
         currentUser,
     };
 })(Markers);
-
-function mapStateToProps({ coordinates }) {
-    return { coordinates };
-}
-
-function connectWithStore(store, WrappedComponent, ...args) {
-    const ConnectedWrappedComponent = connect(...args)(WrappedComponent)
-    return function (props) {
-        return <ConnectedWrappedComponent {...props} store={store}/>
-    }
-}
-
-console.log(appStore);
-const connectedMarkers = connectWithStore(appStore, trackedMarkers, mapStateToProps);
-
-export default connectedMarkers
