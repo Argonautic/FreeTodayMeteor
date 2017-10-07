@@ -26,7 +26,7 @@ export default class MapComponents extends Component {
     }
 
     render() {
-        const eventDOM = this.props.eventDom;
+        const eventDOM = this.props.eventDOM;
         const eventWindow = this.props.eventWindow;
         const map = this.props.map;
 

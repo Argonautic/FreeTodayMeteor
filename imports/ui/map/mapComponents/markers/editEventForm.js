@@ -37,7 +37,6 @@ export default class EditEventForm extends Component {
             eventDescription: this.state.eventDescription,
             eventLocation: this.props.event.eventLocation
         };
-        console.log(updatedEvent);
 
         updateEvent.call({eventId: this.props.event._id, updatedEvent}, (err) => {
             if (err) {

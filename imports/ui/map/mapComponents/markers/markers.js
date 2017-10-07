@@ -1,5 +1,6 @@
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 
 import ViewEvent from './viewEvent';
 
@@ -13,7 +14,7 @@ class Markers extends Component {
     }
 
     eventUpdatedOrDeleted() {
-        this.eventWindow.close();
+        this.props.eventWindow.close();
     }
 
     render() {
@@ -34,7 +35,7 @@ class Markers extends Component {
                     map: this.props.map,
                     position: latLng,
                     title: event.eventName,
-                    icon: this.props.currentUser && event.owner === this.props.currentUser._id ?
+                    icon: this.props.currentUser && event.owner === this.props.currentUser ?
                         '/images/gold-marker-15.svg' :
                         '/images/green-marker-15.svg',
                 });
@@ -46,7 +47,7 @@ class Markers extends Component {
                         currentUser={this.props.currentUser}
                         eventUpdatedOrDeleted={this.eventUpdatedOrDeleted}
                     />;
-                    render(viewEventForm, this.eventDOM);
+                    render(viewEventForm, this.props.eventDOM);
 
                     this.props.eventWindow.setPosition(latLng);
                     this.props.eventWindow.open(this.props.map);
@@ -61,7 +62,7 @@ class Markers extends Component {
 
 export default withTracker((props) => {
     const handle = Meteor.subscribe('events.events-around-search', props.centerCoordinates);
-    const currentUser = Meteor.user();
+    const currentUser = Meteor.userId();
 
     return {
         ready: handle.ready(),
