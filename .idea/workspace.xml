@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac88e271-65e6-4d2b-ad75-f1c4c5c3dc0f" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/redux/actions/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/redux/reducers/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/redux/reducers/reducer_coordinates.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/redux/reducers/reducer_map.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/mapComponent.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/markers/editEventForm.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/editEventForm.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/markers/eventMarker.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/eventMarker.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/markers/markers.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/markers/viewEvent.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/viewEvent.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/markers/viewEventForm.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/viewEventForm.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/newEvent/newEvent.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/newEvent/newEvent.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponent/newEvent/newEventForm.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/newEvent/newEventForm.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/map/searchbar.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/searchbar/searchbar.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/style/mapComponent.css" afterPath="$PROJECT_DIR$/public/style/mapComponents.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/main.js" afterPath="$PROJECT_DIR$/client/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/map/map.js" afterPath="$PROJECT_DIR$/imports/ui/map/map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/api/events/server/publications.js" afterPath="$PROJECT_DIR$/imports/api/events/server/publications.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js" afterPath="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,7 +19,7 @@
       <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/map/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-22">
+            <state relative-caret-position="140">
               <caret line="31" column="34" lean-forward="false" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -43,13 +28,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mapComponents.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mapComponents.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="308">
+              <caret line="14" column="74" lean-forward="false" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="markers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="65" column="38" lean-forward="true" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,6 +60,16 @@
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="publications.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/api/events/server/publications.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,18 +100,6 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="markers.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#55#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -167,6 +162,7 @@
       <find>currentUser</find>
       <find>this.props</find>
       <find>eventlocation</find>
+      <find>allEvents</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -183,7 +179,6 @@
         <option value="$PROJECT_DIR$/imports/api/events/eventSchema.js" />
         <option value="$PROJECT_DIR$/imports/api/shared/positionSchema.js" />
         <option value="$PROJECT_DIR$/imports/ui/home/map/mapComponent.js" />
-        <option value="$PROJECT_DIR$/imports/api/events/server/publications.js" />
         <option value="$PROJECT_DIR$/imports/ui/map/subcomponents/EventMarker.js" />
         <option value="$PROJECT_DIR$/imports/ui/map/subcomponents/eventMarker.js" />
         <option value="$PROJECT_DIR$/imports/ui/map/subcomponents/viewEventForm.js" />
@@ -225,10 +220,11 @@
         <option value="$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponent.js" />
         <option value="$PROJECT_DIR$/public/style/mapComponent.css" />
         <option value="$PROJECT_DIR$/imports/ui/map/map.js" />
-        <option value="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js" />
         <option value="$PROJECT_DIR$/client/main.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/imports/ui/map/mapComponents/searchbar/searchbar.js" />
+        <option value="$PROJECT_DIR$/imports/api/events/server/publications.js" />
+        <option value="$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js" />
         <option value="$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js" />
       </list>
     </option>
@@ -300,25 +296,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="style" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FreeTodayMeteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FreeTodayMeteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="imports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -336,7 +314,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
+              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -354,37 +332,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
+              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FreeTodayMeteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FreeTodayMeteor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imports" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapComponents" />
+              <option name="myItemId" value="events" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -399,6 +351,18 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="imports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="events" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -727,13 +691,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/home/home.js" />
     <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponentOld.js" />
-    <entry file="file://$PROJECT_DIR$/imports/api/events/server/publications.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/google-icons/js/map-icons.js" />
     <entry file="file://$PROJECT_DIR$/public/google-icons/font-css/map-icons.css" />
     <entry file="file://$PROJECT_DIR$/public/images/green-marker-15.svg">
@@ -1032,6 +989,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/imports/api/events/server/publications.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/searchbar/searchbar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1044,18 +1009,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/map/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
+        <state relative-caret-position="140">
           <caret line="31" column="34" lean-forward="false" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1064,10 +1019,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/markers/markers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="63" column="23" lean-forward="true" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+        <state relative-caret-position="194">
+          <caret line="65" column="38" lean-forward="true" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/map/mapComponents/mapComponents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="74" lean-forward="false" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -24,7 +24,7 @@ class Markers extends Component {
         this.markers = [];
 
         if (this.props.map.getZoom() > 10) {
-            this.props.allEvents.forEach(event => {
+            this.props.eventsAroundSearch.forEach(event => {
 
                 //Convert GeoJSON to google maps format LatLng
                 let coordinates = event.eventLocation.location.coordinates;
@@ -39,7 +39,6 @@ class Markers extends Component {
                         '/images/green-marker-15.svg',
                 });
 
-                //Do these listeners persist across re-renders?
                 marker.addListener('click', () => {
                     let viewEventForm = <ViewEvent
                         marker={marker}
@@ -61,13 +60,12 @@ class Markers extends Component {
 }
 
 export default withTracker((props) => {
-    console.log(props);
-    const handle = Meteor.subscribe('events.all-public-events');
+    const handle = Meteor.subscribe('events.events-around-search', props.centerCoordinates);
     const currentUser = Meteor.user();
 
     return {
         ready: handle.ready(),
-        allEvents: Events.find({}).fetch(),
+        eventsAroundSearch: Events.find({}).fetch(),
         currentUser,
     };
 })(Markers);

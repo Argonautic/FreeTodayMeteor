@@ -12,7 +12,7 @@ export default class MapComponents extends Component {
         super(props);
 
         const googleLatLng = this.props.map.center;
-        const centerCoordinates = [googleLatLng.lng, googleLatLng.lat]
+        const centerCoordinates = [googleLatLng.lng(), googleLatLng.lat()]
 
         this.state = {
             centerCoordinates
