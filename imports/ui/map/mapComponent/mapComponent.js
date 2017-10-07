@@ -40,6 +40,7 @@ class MapComponent extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div id="mapFinished" />
         );
@@ -50,4 +51,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ pushMap }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(MapComponent);
+function mapStateToProps({ coordinates }) {
+    return { coordinates };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapComponent);

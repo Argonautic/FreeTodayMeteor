@@ -9,11 +9,12 @@ import App from '../imports/ui/app';
 import reducers from '../imports/ui/redux/reducers';
 import ReduxPromise from 'redux-promise';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+export const appStore = createStoreWithMiddleware(reducers);
 
 Meteor.startup(() => {
     render(
-        <Provider store={createStoreWithMiddleware(reducers)}>
+        <Provider id="store" store={appStore}>
             <App />
         </Provider>,
         document.getElementById('render-target'))

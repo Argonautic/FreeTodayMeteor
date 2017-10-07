@@ -5,7 +5,6 @@ import Header from './header/header';
 import Map from './map/map';
 
 export default class App extends Component {
-
     render() {
         return (
             <BrowserRouter>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { pushCoordinates } from '../redux/actions/index';
-import { Search } from 'semantic-ui-react';
 
 import '/public/style/searchbar.css';
 
@@ -30,6 +29,7 @@ class Searchbar extends Component {
             lng = coordinateData.lng();
 
             map.setCenter({lat, lng});
+            this.props.pushCoordinates([lng, lat]);
         });
     }
 
@@ -48,8 +48,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ pushCoordinates }, dispatch);
 }
 
-function mapStateToProps({ map }) {
-    return { map };
+function mapStateToProps({ coordinates }) {
+    return { coordinates };
 }
 
-export default connect(mapStateToProps)(Searchbar);
+export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);

@@ -9,6 +9,9 @@ export function pushMap(map) {
 }
 
 export function pushCoordinates(coordinates) {
-
+    return {
+        type: PUSH_COORDINATES,
+        payload: coordinates
+    }
 }
 
