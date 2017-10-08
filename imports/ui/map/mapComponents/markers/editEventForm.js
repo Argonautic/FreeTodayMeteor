@@ -71,7 +71,7 @@ export default class EditEventForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="editEventWindow">
                 <Form success={this.state.success} error={this.state.error}>
                     <Form.Field
                         value={this.state.eventName}

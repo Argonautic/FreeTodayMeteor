@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Menu, Button, Icon, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+import '/public/style/header.css';
+
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -72,7 +74,7 @@ class Header extends Component {
 
     render() {
         return (
-            <Menu inverted fixed="top">
+            <Menu id="menu" inverted>
                 <Menu.Item name="FreeToday" >
                     <Link to="/">
                         <h3>FreeToday</h3>

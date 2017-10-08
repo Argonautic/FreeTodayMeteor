@@ -14,6 +14,7 @@ export default class Map extends Component {
 
     constructEventWindow() {
         this.eventDOM = document.createElement('div');
+        this.eventDOM.id = 'eventWindow';
         this.eventWindow = new google.maps.InfoWindow({ content: this.eventDOM });
     }
 

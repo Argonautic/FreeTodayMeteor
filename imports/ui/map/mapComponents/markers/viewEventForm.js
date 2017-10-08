@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { Item } from 'semantic-ui-react';
+import { Item, Header } from 'semantic-ui-react';
 
-export default class ViewEvent extends Component {
+export default class ViewEventForm extends Component {
+    componentDidMount() {
+        console.log(this.props.event.startDate)
+    }
+
     render() {
         return (
-            <Item>
-                <Item.Content>
-                    <Item.Header>{this.props.event.eventName}</Item.Header>
-                    <Item.Description>{this.props.event.eventDescription}</Item.Description>
-                </Item.Content>
-            </Item>
+            <div className="viewEventWindow">
+                <Item>
+                    <Item.Content>
+                        <Header>{this.props.event.eventName}</Header>
+                        <Item.Description>
+                            <div>
+                                {this.props.event.eventDescription}
+                            </div>
+                        </Item.Description>
+                    </Item.Content>
+                </Item>
+            </div>
         );
     }
 }

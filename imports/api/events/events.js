@@ -17,8 +17,6 @@ export const submitNewEvent = new ValidatedMethod({
     run(newEvent) {
         if (!this.userId) {
             throw new Meteor.Error('You must be logged in to create an event, you sly devil');
-        } else {
-            newEvent.owner = this.userId;
         }
 
         Events.insert(newEvent);
@@ -41,8 +39,6 @@ export const updateEvent = new ValidatedMethod({
             throw new Meteor.Error("Event to update doesn't exist");
         } else if (!this.userId || this.userId !== event.owner) {
             throw new Meteor.Error("You don't have permission to edit this event");
-        } else {
-            updatedEvent.owner = this.userId;
         }
 
         Events.update({ _id: eventId }, {$set: updatedEvent});

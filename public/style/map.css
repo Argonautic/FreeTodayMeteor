@@ -4,12 +4,11 @@
 }
 
 #mapCSSWrapper {
-    height: 100vh;
+    height: calc(100vh - 48px);
     width: 100vw;
 }
 
 #mapContainer {
-    height: calc(100% - 48px);
-    margin-top: 48px;
+    height: 100%;
     width: 100%;
 }

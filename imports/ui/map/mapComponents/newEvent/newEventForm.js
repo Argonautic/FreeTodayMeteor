@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import { Form, Input, TextArea, Message } from 'semantic-ui-react';
 
 import { submitNewEvent } from '../../../../api/events/events';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default class NewEventForm extends Component {
     constructor(props) {
@@ -10,11 +14,15 @@ export default class NewEventForm extends Component {
         this.state = {
             eventName: '',
             eventDescription: '',
+            startDate: '',
+            endDate: '',
             success: false,
             error: false
         };
 
         this.onChange = this.onChange.bind(this);
+        this.onStartDateChange = this.onStartDateChange.bind(this);
+        this.onEndDateChange = this.onEndDateChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -28,13 +36,22 @@ export default class NewEventForm extends Component {
         });
     }
 
+    onStartDateChange(date) {
+        this.setState({ startDate: date });
+    }
+
+    onEndDateChange(date) {
+        this.setState({ endDate: date });
+    }
+
     onSubmit() {
         const coordinates = [this.props.eventLocation.lng, this.props.eventLocation.lat];
-        console.log(coordinates);
 
         const newEvent = {
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
+            startDate: moment(this.state.startDate).toDate(),
+            endDate: moment(this.state.endDate).toDate(),
             eventLocation: {
                 location: {
                     coordinates
@@ -45,20 +62,21 @@ export default class NewEventForm extends Component {
         submitNewEvent.call(newEvent, (err) => {
             if (err) {
                 console.log(`ERROR(${err.code}): ${err.message}`)
+            } else {
+                this.props.newEventSubmitted();
+                this.setState({
+                    eventName: '',
+                    eventDescription: '',
+                    stateDate: '',
+                    endDate: ''
+                });
             }
-        });
-
-        this.props.newEventSubmitted();
-
-        this.setState({
-            eventName: '',
-            eventDescription: ''
         });
     }
 
     render() {
         return (
-            <div>
+            <div className="editEventWindow">
                 <h3>New Event</h3>
                 <Form success={this.state.success} error={this.state.error} onSubmit={this.onSubmit}>
                     <Form.Field
@@ -80,6 +98,27 @@ export default class NewEventForm extends Component {
                         control={TextArea}
                         maxLength="250"
                     />
+                    <Form.Field required>
+                        <label>Start Date</label>
+                        <DatePicker
+                            showTimeSelect
+                            className="startDate"
+                            minDate={moment()}
+                            maxDate={moment().add(14, 'days')}
+                            selected={this.state.startDate}
+                            onChange={this.onStartDateChange}
+                        />
+                    </Form.Field>
+                    <Form.Field required>
+                        <label>End Date</label>
+                        <DatePicker
+                            showTimeSelect
+                            minDate={moment()}
+                            maxDate={moment().add(14, 'days')}
+                            selected={this.state.endDate}
+                            onChange={this.onEndDateChange}
+                        />
+                    </Form.Field>
                     <Message error header="Form Error" />
                     <Form.Button primary content="Submit" />
                 </Form>
