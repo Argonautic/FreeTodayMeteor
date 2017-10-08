@@ -25,7 +25,13 @@ export default eventSchema = new SimpleSchema({
     endDate: {
         type: Date,
         custom: function() {
-            if (this.field('startDate').value >= this.value) {
+            startDate =  this.field('startDate').value;
+            endDate = this.value;
+
+            // A Date object seems to pass a >= check with another Date object of the same
+            // time and day, so two comparisons have to be made
+            if (startDate >= endDate ||
+                (startDate >= endDate && startDate.getTime() >= endDate.getTime())) {
                 return "End Date can't be sooner than Start Date, silly"
             }
         }

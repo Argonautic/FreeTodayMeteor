@@ -8,7 +8,7 @@ Meteor.publish('events.events-around-search', function(centerCoordinates) {
     return Events.find({
         'eventLocation.location': {
             $geoWithin: {
-                $centerSphere: [centerCoordinates, 15 / 3963.2]
+                $centerSphere: [centerCoordinates, 30 / 3963.2]
             }
         }
     })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Divider } from 'semantic-ui-react';
 
 import ViewEventForm from './viewEventForm';
 import EditEventForm from './editEventForm';
@@ -36,6 +36,7 @@ export default class ViewEvent extends Component {
         return (
             <div>
                 {this.renderEditButton()}
+                <Divider />
                 {!this.state.editing ?
                     <ViewEventForm event={this.props.event} /> :
                     <EditEventForm

@@ -1,9 +1,14 @@
 .editEventWindow {
     width: 300px;
+    margin-top: 10px;
 }
 
 .viewEventWindow {
+    margin-top: 10px;
+}
 
+.viewEventWindow p {
+    font-size: 16px;
 }
 
 ul {
