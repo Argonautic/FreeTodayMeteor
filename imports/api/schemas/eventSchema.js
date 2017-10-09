@@ -21,6 +21,11 @@ export default eventSchema = new SimpleSchema({
     },
     startDate: {
         type: Date,
+        custom: function() {
+            if (this.value <= new Date()) {
+                return "Start Date has already passed";
+            }
+        }
     },
     endDate: {
         type: Date,

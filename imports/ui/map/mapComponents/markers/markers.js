@@ -36,8 +36,8 @@ class Markers extends Component {
                     position: latLng,
                     title: event.eventName,
                     icon: this.props.currentUser && event.owner === this.props.currentUser ?
-                        'images/map-marker2.png' :
-                        'images/map-marker1.png'
+                        'images/map-marker1.png' :
+                        'images/map-marker2.png'
                 });
 
                 marker.addListener('click', () => {

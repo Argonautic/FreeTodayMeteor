@@ -6,11 +6,20 @@ Meteor.publish('events.all-public-events', function() {
 
 Meteor.publish('events.events-around-search', function(centerCoordinates) {
     return Events.find({
-        'eventLocation.location': {
-            $geoWithin: {
-                $centerSphere: [centerCoordinates, 30 / 3963.2]
+        $and: [
+            {
+                'eventLocation.location': {
+                    $geoWithin: {
+                        $centerSphere: [centerCoordinates, 30 / 3963.2]
+                    }
+                }
+            },
+            {
+                endDate: {
+                    $gt: new Date()
+                }
             }
-        }
+        ]
     })
 });
 
