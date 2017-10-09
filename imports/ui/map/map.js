@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import MapComponents from './mapComponents/mapComponents'
+import mapStyles from './mapStyles';
 
 import '/public/style/map';
 
@@ -22,7 +23,8 @@ export default class Map extends Component {
         this.map = new google.maps.Map(document.getElementById('mapContainer'), {
             zoom: 15,
             center: {lat: 40.7604247, lng: -73.9178987},
-            disableDefaultUI: true
+            disableDefaultUI: true,
+            styles: mapStyles
         });
 
         this.constructEventWindow();

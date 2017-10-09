@@ -35,7 +35,7 @@ export default class Searchbar extends Component {
             <input
                 id="searchTextField"
                 type="text"
-                placeholder="Pick Your Neighborhood"
+                placeholder="Find events within 30 miles of your neighborhood"
             />
         )
     }
