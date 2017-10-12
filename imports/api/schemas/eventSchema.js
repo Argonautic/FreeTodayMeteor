@@ -4,9 +4,10 @@ import locationSchema from './locationSchema';
 
 export default eventSchema = new SimpleSchema({
     owner: {
-        type: String,
+        type: Object,
+        blackbox: true,
         autoValue: function() {
-            return this.userId || 'none';
+            return Meteor.user();
         }
     },
     eventName: {

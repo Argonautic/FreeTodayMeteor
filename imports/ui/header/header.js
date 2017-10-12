@@ -45,7 +45,7 @@ class Header extends Component {
     }
 
     facebookLogin() {
-        const options = { requestPermissions: ['email'], loginStyle: 'redirect' };
+        const options = { requestPermissions: ['email', 'public_profile'], loginStyle: 'redirect' };
 
         Meteor.loginWithFacebook(options, (error) => {
             if (error) {

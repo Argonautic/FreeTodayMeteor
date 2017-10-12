@@ -61,6 +61,7 @@ export default class NewEventForm extends Component {
 
         submitNewEvent.call(newEvent, (err) => {
             if (err) {
+                console.log(err);
                 console.log(`ERROR(${err.code}): ${err.message}`)
             } else {
                 this.props.newEventSubmitted();

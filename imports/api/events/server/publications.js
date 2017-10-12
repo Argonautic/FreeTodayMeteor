@@ -29,12 +29,12 @@ Meteor.publish('events.my-events', function() {
     }
 
     return Events.find({
-        owner: this.userId
+        'owner._id': this.userId
     });
 });
 
 Meteor.publish('events.not-my-events', function() {
     return Events.find({
-        owner: {$ne: this.userId}
+        'owner._id': {$ne: this.userId}
     });
 });

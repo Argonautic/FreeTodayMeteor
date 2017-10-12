@@ -37,7 +37,7 @@ export const updateEvent = new ValidatedMethod({
 
         if (!event) {
             throw new Meteor.Error("Event to update doesn't exist");
-        } else if (!this.userId || this.userId !== event.owner) {
+        } else if (!this.userId || this.userId !== event.owner._id) {
             throw new Meteor.Error("You don't have permission to edit this event");
         }
 
@@ -52,7 +52,7 @@ export const deleteEvent = new ValidatedMethod({
 
         if (!event) {
             throw new Meteor.Error("Event to delete doesn't exist")
-        } else if (event.owner !== this.userId) {
+        } else if (event.owner._id !== this.userId) {
             throw new Meteor.Error("You don't have permission to delete this event");
         }
 
