@@ -11,6 +11,10 @@
     font-size: 16px;
 }
 
+#item-content {
+    margin-left: 10px;
+}
+
 ul {
     padding-left: 0;
 }

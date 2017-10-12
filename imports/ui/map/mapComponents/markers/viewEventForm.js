@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Item } from 'semantic-ui-react';
+import { Item, Divider, Button } from 'semantic-ui-react';
 
 export default class ViewEventForm extends Component {
     constructor(props) {
@@ -12,6 +12,19 @@ export default class ViewEventForm extends Component {
             hour: '2-digit',
             minute:'2-digit'
         };
+
+        this.renderSignupButton = this.renderSignupButton.bind(this);
+        this.signup = this.signup.bind(this);
+    }
+
+    renderSignupButton() {
+        if (this.props.currentUserId !== this.props.event.owner._id) {
+            return <Button onClick={this.signup}>I'm In!</Button>
+        }
+    }
+
+    signup() {
+
     }
 
     render() {
@@ -26,7 +39,7 @@ export default class ViewEventForm extends Component {
                     <Item>
                         <Item.Image size="tiny" src={event.owner.profile.picture} /><br/>
 
-                        <Item.Content>
+                        <Item.Content id="item-content">
                             <Item.Header>{event.eventName}</Item.Header>
                             <Item.Meta>Host: {event.owner.profile.name}</Item.Meta>
                             <Item.Description>
@@ -39,6 +52,9 @@ export default class ViewEventForm extends Component {
                         </Item.Content>
                     </Item>
                 </Item.Group>
+
+                <Divider />
+                {this.renderSignupButton()}
             </div>
         );
     }

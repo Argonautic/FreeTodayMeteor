@@ -35,7 +35,7 @@ class Markers extends Component {
                     map: this.props.map,
                     position: latLng,
                     title: event.eventName,
-                    icon: this.props.currentUser && event.owner._id === this.props.currentUser ?
+                    icon: this.props.currentUserId && event.owner._id === this.props.currentUserId ?
                         'images/map-marker1.png' :
                         'images/map-marker2.png'
                 });
@@ -44,7 +44,7 @@ class Markers extends Component {
                     let viewEventForm = <ViewEvent
                         marker={marker}
                         event={event}
-                        currentUser={this.props.currentUser}
+                        currentUserId={this.props.currentUserId}
                         eventUpdatedOrDeleted={this.eventUpdatedOrDeleted}
                     />;
                     render(viewEventForm, this.props.eventDOM);
@@ -62,11 +62,11 @@ class Markers extends Component {
 
 export default withTracker((props) => {
     const handle = Meteor.subscribe('events.events-around-search', props.centerCoordinates);
-    const currentUser = Meteor.userId();
+    const currentUserId = Meteor.userId();
 
     return {
         ready: handle.ready(),
         eventsAroundSearch: Events.find({}).fetch(),
-        currentUser,
+        currentUserId,
     };
 })(Markers);

@@ -9,7 +9,7 @@ export default class ViewEvent extends Component {
         super(props);
 
         this.state = {
-            editing: this.props.currentUser === this.props.event.owner._id
+            editing: this.props.currentUserId === this.props.event.owner._id
         };
 
         this.renderEditButton = this.renderEditButton.bind(this);
@@ -17,7 +17,7 @@ export default class ViewEvent extends Component {
     }
 
     renderEditButton() {
-        if (this.props.currentUser === this.props.event.owner._id) {
+        if (this.props.currentUserId === this.props.event.owner._id) {
             return <Button onClick={this.toggleEditing}>
                 {this.state.editing ? "View Event" : "Edit Event"}
             </Button>
@@ -29,7 +29,7 @@ export default class ViewEvent extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ editing: nextProps.currentUser === nextProps.event.owner._id });
+        this.setState({ editing: nextProps.currentUserId === nextProps.event.owner._id });
     }
 
     render() {
@@ -38,7 +38,7 @@ export default class ViewEvent extends Component {
                 {this.renderEditButton()}
                 <Divider />
                 {!this.state.editing ?
-                    <ViewEventForm event={this.props.event} /> :
+                    <ViewEventForm event={this.props.event} currentUserId={this.props.currentUserId} /> :
                     <EditEventForm
                         marker={this.props.marker}
                         event={this.props.event}
