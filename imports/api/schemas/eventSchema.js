@@ -17,10 +17,14 @@ export default eventSchema = new SimpleSchema({
         optional: true
     },
     eventDates: dateSchema,
+    // Can modify eventParticipants to be a separate collection if this app ever gets
+    // yuge, so that queries are faster than worst case O(n)
     eventParticipants: {
-        type: Object,
-        defaultValue: {},
-        blackbox: true
+        type: Array,
+        defaultValue: []
+    },
+    'eventParticipants.$': {
+        type: String
     },
     eventLocation: locationSchema
 });

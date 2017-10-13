@@ -30,21 +30,12 @@ export const signupForEvent = new ValidatedMethod({
     validate: function(eventId) {
         event = Events.findOne(eventId);
 
-        const Id = this.userId;
-
-        if (Id === null) {
-            throw new Meteor.Error("You must log in to sign up for an event")
-        } else if (event.eventParticipants[Id]) {
-            throw new Meteor.Error("You're already signed up")
+        if (this.userId === null) {
+            throw new Meteor.Error("You must log in to sign up for an event");
         }
     },
     run(eventId) {
-        event = Events.findOne(eventId);
-        Id = this.userId;
-
-        Events.update({ _id: eventId }, { $set: {
-            eventParticipants: {  Id: true },
-        }});
+        Events.update({ _id: eventId }, { $addToSet: { eventParticipants: this.userId, }});
     }
 });
 

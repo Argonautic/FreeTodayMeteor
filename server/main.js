@@ -7,5 +7,5 @@ import '/imports/api/users/users';
 
 Meteor.startup(() => {
     Events._ensureIndex({ 'eventLocation.location': "2dsphere" });
-    //Events._ensureIndex({ 'owner._id': 1 });
+    Events._ensureIndex({ 'eventParticipants': 1 })
 });

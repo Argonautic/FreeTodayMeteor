@@ -26,12 +26,11 @@ export default class ViewEventForm extends Component {
     }
 
     signup() {
-        //signupForEvent.validate(this.props.event._id);
         signupForEvent.call(this.props.event._id, (err) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log('event updated!');
+                console.log("You're in!");
             }
         });
     }
@@ -39,8 +38,8 @@ export default class ViewEventForm extends Component {
     render() {
         const { event } = this.props;
 
-        const startDateString = this.props.event.startDate.toLocaleDateString([], this.dateFormat);
-        const endDateString = this.props.event.endDate.toLocaleDateString([], this.dateFormat);
+        const startDateString = this.props.event.eventDates.startDate.toLocaleDateString([], this.dateFormat);
+        const endDateString = this.props.event.eventDates.endDate.toLocaleDateString([], this.dateFormat);
 
         return (
             <div className="viewEventWindow">
