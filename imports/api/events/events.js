@@ -33,6 +33,11 @@ export const signupForEvent = new ValidatedMethod({
     },
     run(eventId) {
         Events.update({ _id: eventId }, { $addToSet: { eventParticipants: this.userId, }});
+
+        if (!this.isSimulation) {
+            import { newEventAttendee } from './server/serverOnlyFunctions';
+            newEventAttendee(event, this.userId)
+        }
     }
 });
 
