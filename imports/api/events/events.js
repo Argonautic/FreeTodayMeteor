@@ -6,11 +6,6 @@ import eventSchema from '../schemas/eventSchema';
 Events = new Mongo.Collection('events');
 Events.attachSchema(eventSchema);
 
-Meteor.methods({
-
-});
-
-
 export const submitNewEvent = new ValidatedMethod({
     name: 'submitNewEvent',
     validate: eventSchema.validator({ clean: true }),
@@ -20,6 +15,8 @@ export const submitNewEvent = new ValidatedMethod({
         } else if (newEvent.owner._id !== this.userId) {
             throw new Meteor.Error("You can't create an event in someone else's ownership");
         }
+
+        newEvent.eventParticipants = [this.userId];
 
         Events.insert(newEvent);
     }
