@@ -11,6 +11,7 @@ class Header extends Component {
         super(props);
 
         this.renderLogins = this.renderLogins.bind(this);
+        this.renderNotifications = this.renderNotifications.bind(this);
     }
 
     renderLogins() {
@@ -30,8 +31,21 @@ class Header extends Component {
                 </Menu.Menu>
             )
         } else {
+            const noNotifications = <Icon name="bell outline" />;
+            const notifications = <Icon.Group>
+                <Icon name="bell outline" />
+                <Icon id="circle" corner name="circle" />
+            </Icon.Group>;
+
             return (
                 <Menu.Menu position="right">
+                    <Menu.Item>
+                        <Dropdown icon={noNotifications}>
+                            <Dropdown.Menu>
+                                {this.renderNotifications()}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Menu.Item>
                     <Menu.Item>
                         <Dropdown text={this.props.userName}>
                             <Dropdown.Menu>
@@ -41,6 +55,18 @@ class Header extends Component {
                     </Menu.Item>
                 </Menu.Menu>
             )
+        }
+    }
+
+    renderNotifications() {
+        console.log(this.props.myNotifications);
+
+        if (this.props.myNotifications.notifications.length === 0) {
+            return <Dropdown.Item text="No Notifications" />
+        } else {
+            return this.props.myNotifications.notifications.map((notification) => {
+                return <Dropdown.Item icon="bell" text={notification} />
+            });
         }
     }
 
@@ -87,11 +113,18 @@ class Header extends Component {
 }
 
 export default withTracker(() => {
+    const handle = Meteor.subscribe('users.notifications-for-me');
+    const ready = handle.ready();
     const currentUser = Meteor.user();
     const userName = currentUser && currentUser.profile.name;
 
     return {
+        ready,
         currentUser,
-        userName
+        userName,
+        myNotifications: Meteor.users.find(
+            { _id: Meteor.userId() },
+            { fields: { notifications : 1 }}
+        ).fetch()[0]
     };
 })(Header);
