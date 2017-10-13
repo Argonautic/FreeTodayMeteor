@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Item, Divider, Button } from 'semantic-ui-react';
 
+import { signupForEvent } from '../../../../api/events/events';
+
 export default class ViewEventForm extends Component {
     constructor(props) {
         super(props);
@@ -19,12 +21,19 @@ export default class ViewEventForm extends Component {
 
     renderSignupButton() {
         if (this.props.currentUserId !== this.props.event.owner._id) {
-            return <Button onClick={this.signup}>I'm In!</Button>
+            return <Button primary onClick={this.signup}>I'm In!</Button>
         }
     }
 
     signup() {
-
+        //signupForEvent.validate(this.props.event._id);
+        signupForEvent.call(this.props.event._id, (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('event updated!');
+            }
+        });
     }
 
     render() {

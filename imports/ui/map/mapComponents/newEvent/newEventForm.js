@@ -48,10 +48,13 @@ export default class NewEventForm extends Component {
         const coordinates = [this.props.eventLocation.lng, this.props.eventLocation.lat];
 
         const newEvent = {
+            owner: Meteor.user(),
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
-            startDate: moment(this.state.startDate).toDate(),
-            endDate: moment(this.state.endDate).toDate(),
+            eventDates: {
+                startDate: moment(this.state.startDate).toDate(),
+                endDate: moment(this.state.endDate).toDate(),
+            },
             eventLocation: {
                 location: {
                     coordinates

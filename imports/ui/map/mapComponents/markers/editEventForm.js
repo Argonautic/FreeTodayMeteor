@@ -48,8 +48,10 @@ export default class EditEventForm extends Component {
         const updatedEvent = {
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
-            startDate: moment(this.state.startDate).toDate(),
-            endDate: moment(this.state.endDate).toDate(),
+            eventDates: {
+                startDate: moment(this.state.startDate).toDate(),
+                endDate: moment(this.state.endDate).toDate()
+            },
             eventLocation: this.props.event.eventLocation
         };
 

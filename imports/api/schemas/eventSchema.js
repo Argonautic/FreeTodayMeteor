@@ -1,15 +1,11 @@
 import SimpleSchema from 'simpl-schema';
 
+import userSchema from './userSchema';
+import dateSchema from './dateSchema';
 import locationSchema from './locationSchema';
 
 export default eventSchema = new SimpleSchema({
-    owner: {
-        type: Object,
-        blackbox: true,
-        autoValue: function() {
-            return Meteor.user();
-        }
-    },
+    owner: userSchema,
     eventName: {
         type: String,
         min: 3,
@@ -20,27 +16,11 @@ export default eventSchema = new SimpleSchema({
         max: 500,
         optional: true
     },
-    startDate: {
-        type: Date,
-        custom: function() {
-            if (this.value <= new Date()) {
-                return "Start Date has already passed";
-            }
-        }
-    },
-    endDate: {
-        type: Date,
-        custom: function() {
-            const startDate =  this.field('startDate').value;
-            const endDate = this.value;
-            const datesValid = startDate >= endDate;
-
-            // A Date object passes a >= check with another Date object of the same
-            // time and day, so two comparisons have to be made
-            if (datesValid || (datesValid && startDate.getTime() >= endDate.getTime())) {
-                return "End Date can't be sooner than Start Date, silly"
-            }
-        }
+    eventDates: dateSchema,
+    eventParticipants: {
+        type: Object,
+        defaultValue: {},
+        blackbox: true
     },
     eventLocation: locationSchema
 });

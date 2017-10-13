@@ -17,9 +17,34 @@ export const submitNewEvent = new ValidatedMethod({
     run(newEvent) {
         if (!this.userId) {
             throw new Meteor.Error('You must be logged in to create an event, you sly devil');
+        } else if (newEvent.owner._id !== this.userId) {
+            throw new Meteor.Error("You can't create an event in someone else's ownership");
         }
 
         Events.insert(newEvent);
+    }
+});
+
+export const signupForEvent = new ValidatedMethod({
+    name: 'signupForEvent',
+    validate: function(eventId) {
+        event = Events.findOne(eventId);
+
+        const Id = this.userId;
+
+        if (Id === null) {
+            throw new Meteor.Error("You must log in to sign up for an event")
+        } else if (event.eventParticipants[Id]) {
+            throw new Meteor.Error("You're already signed up")
+        }
+    },
+    run(eventId) {
+        event = Events.findOne(eventId);
+        Id = this.userId;
+
+        Events.update({ _id: eventId }, { $set: {
+            eventParticipants: {  Id: true },
+        }});
     }
 });
 
@@ -30,7 +55,7 @@ export const updateEvent = new ValidatedMethod({
             type: String,
             regEx: SimpleSchema.RegEx.Id,
         },
-        updatedEvent: eventSchema
+        updatedEvent: eventSchema.omit('owner')
     }).validator({ clean: true }),
     run({eventId, updatedEvent}) {
         event = Events.findOne(eventId);
@@ -41,7 +66,7 @@ export const updateEvent = new ValidatedMethod({
             throw new Meteor.Error("You don't have permission to edit this event");
         }
 
-        Events.update({ _id: eventId }, {$set: updatedEvent});
+        Events.update({ _id: eventId }, { $set: updatedEvent });
     }
 });
 
@@ -55,7 +80,6 @@ export const deleteEvent = new ValidatedMethod({
         } else if (event.owner._id !== this.userId) {
             throw new Meteor.Error("You don't have permission to delete this event");
         }
-
     },
     run(eventId) {
         Events.remove({ '_id': eventId });

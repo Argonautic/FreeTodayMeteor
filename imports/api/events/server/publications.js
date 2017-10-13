@@ -15,7 +15,7 @@ Meteor.publish('events.events-around-search', function(centerCoordinates) {
                 }
             },
             {
-                endDate: {
+                'eventDates.endDate': {
                     $gt: new Date()
                 }
             }
