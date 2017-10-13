@@ -10,10 +10,10 @@ class Markers extends Component {
 
         this.markers = [];
 
-        this.eventUpdatedOrDeleted = this.eventUpdatedOrDeleted.bind(this);
+        this.eventUpdated = this.eventUpdated.bind(this);
     }
 
-    eventUpdatedOrDeleted() {
+    eventUpdated() {
         this.props.eventWindow.close();
     }
 
@@ -45,7 +45,7 @@ class Markers extends Component {
                         marker={marker}
                         event={event}
                         currentUserId={this.props.currentUserId}
-                        eventUpdatedOrDeleted={this.eventUpdatedOrDeleted}
+                        eventUpdated={this.eventUpdated}
                     />;
                     render(viewEventForm, this.props.eventDOM);
 

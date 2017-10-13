@@ -22,6 +22,6 @@ Accounts.onCreateUser((options, user) => {
     }
 
     user.profile = options.profile;
-    user.notifications = [];
+    //user.notifications = [];
     return user;
 });

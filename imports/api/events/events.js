@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import SimpleSchema from 'simpl-schema';
 
@@ -35,7 +36,7 @@ export const signupForEvent = new ValidatedMethod({
         Events.update({ _id: eventId }, { $addToSet: { eventParticipants: this.userId, }});
 
         if (!this.isSimulation) {
-            import { newEventAttendee } from './server/serverOnlyFunctions';
+            import { newEventAttendee } from '../notifications/server/serverOnlyFunctions';
             newEventAttendee(event, this.userId)
         }
     }
@@ -51,7 +52,7 @@ export const updateEvent = new ValidatedMethod({
         updatedEvent: eventSchema.omit('owner')
     }).validator({ clean: true }),
     run({eventId, updatedEvent}) {
-        event = Events.findOne(eventId);
+        const event = Events.findOne(eventId);
 
         if (!event) {
             throw new Meteor.Error("Event to update doesn't exist");

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import Markers from './markers/markers';
-import NewEvent from './newEvent/newEvent';
+import Markers from './existingEvents/markers';
+import NewEvent from './newEvents/newEvent';
 import Searchbar from './searchbar/searchbar';
 
 import '/public/style/mapComponents.css';

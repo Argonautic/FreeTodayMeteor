@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-import { Form, Input, TextArea, Message } from 'semantic-ui-react';
+import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 
-import { submitNewEvent } from '../../../../api/events/events';
+import { deleteEvent } from '../../../../api/events/events';
+import { updateEvent } from '../../../../api/events/events';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
-export default class NewEventForm extends Component {
+export default class EditEventForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            eventName: '',
-            eventDescription: '',
-            startDate: '',
-            endDate: '',
+            eventName: this.props.event.eventName,
+            eventDescription: this.props.event.eventDescription,
+            startDate: moment(this.props.event.startDate),
+            endDate: moment(this.props.event.endDate),
             success: false,
             error: false
         };
@@ -24,6 +23,7 @@ export default class NewEventForm extends Component {
         this.onStartDateChange = this.onStartDateChange.bind(this);
         this.onEndDateChange = this.onEndDateChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
 
     onChange(event) {
@@ -45,44 +45,50 @@ export default class NewEventForm extends Component {
     }
 
     onSubmit() {
-        const coordinates = [this.props.eventLocation.lng, this.props.eventLocation.lat];
-
-        const newEvent = {
-            owner: Meteor.user(),
+        const updatedEvent = {
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
             eventDates: {
                 startDate: moment(this.state.startDate).toDate(),
-                endDate: moment(this.state.endDate).toDate(),
+                endDate: moment(this.state.endDate).toDate()
             },
-            eventLocation: {
-                location: {
-                    coordinates
-                }
-            }
+            eventLocation: this.props.event.eventLocation
         };
 
-        submitNewEvent.call(newEvent, (err) => {
+        updateEvent.call({eventId: this.props.event._id, updatedEvent}, (err) => {
             if (err) {
-                console.log(err);
-                console.log(`ERROR(${err.code}): ${err.message}`)
+                console.log(`ERROR(${err.code}): ${err.message}`);
             } else {
-                this.props.newEventSubmitted();
-                this.setState({
-                    eventName: '',
-                    eventDescription: '',
-                    stateDate: '',
-                    endDate: ''
-                });
+                console.log('event updated!');
+                this.props.eventUpdated();
             }
         });
+    }
+
+    onDelete() {
+        deleteEvent.call(this.props.event._id, (err) => {
+            if (err) {
+                console.log(`ERROR(${err.code}): ${err.message}`);
+            } else {
+                this.props.marker.setMap(null);
+                google.maps.event.clearListeners(this.props.marker, 'click');
+
+                this.props.eventUpdated();
+            }
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            eventName: nextProps.event.eventName,
+            eventDescription: nextProps.event.eventDescription
+        })
     }
 
     render() {
         return (
             <div className="editEventWindow">
-                <h3>New Event</h3>
-                <Form success={this.state.success} error={this.state.error} onSubmit={this.onSubmit}>
+                <Form success={this.state.success} error={this.state.error}>
                     <Form.Field
                         value={this.state.eventName}
                         onChange={this.onChange}
@@ -108,7 +114,7 @@ export default class NewEventForm extends Component {
                             showTimeSelect
                             className="startDate"
                             minDate={moment()}
-                            maxDate={moment().add(14, 'days')}
+                            maxDate={moment().add(28, 'days')}
                             selected={this.state.startDate}
                             onChange={this.onStartDateChange}
                         />
@@ -124,7 +130,11 @@ export default class NewEventForm extends Component {
                         />
                     </Form.Field>
                     <Message error header="Form Error" />
-                    <Form.Button primary content="Submit" />
+                    <Button.Group>
+                        <Form.Button primary content="Submit" onClick={this.onSubmit} />
+                        <Button.Or />
+                        <Button negative onClick={this.onDelete}>Delete</Button>
+                    </Button.Group>
                 </Form>
             </div>
         );

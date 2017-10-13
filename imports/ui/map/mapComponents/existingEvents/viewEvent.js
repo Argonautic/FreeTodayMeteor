@@ -38,11 +38,14 @@ export default class ViewEvent extends Component {
                 {this.renderEditButton()}
                 <Divider />
                 {!this.state.editing ?
-                    <ViewEventForm event={this.props.event} currentUserId={this.props.currentUserId} /> :
+                    <ViewEventForm
+                        event={this.props.event}
+                        eventUpdated={this.props.eventUpdated}
+                        currentUserId={this.props.currentUserId} /> :
                     <EditEventForm
                         marker={this.props.marker}
                         event={this.props.event}
-                        eventUpdatedOrDeleted={this.props.eventUpdatedOrDeleted}
+                        eventUpdated={this.props.eventUpdated}
                     />
                 }
             </div>

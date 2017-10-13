@@ -1,8 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { Menu, Button, Icon, Dropdown } from 'semantic-ui-react';
+import { Menu, Button, Icon, Dropdown, Loader } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+
+import NotificationItem from './notificationItem';
+import { notificationSeen } from '../../api/notifications/notifications';
 
 import '/public/style/header.css';
 
@@ -12,6 +15,7 @@ class Header extends Component {
 
         this.renderLogins = this.renderLogins.bind(this);
         this.renderNotifications = this.renderNotifications.bind(this);
+        this.onNotificationHover = this.onNotificationHover.bind(this);
     }
 
     renderLogins() {
@@ -31,16 +35,10 @@ class Header extends Component {
                 </Menu.Menu>
             )
         } else {
-            const noNotifications = <Icon name="bell outline" />;
-            const notifications = <Icon.Group>
-                <Icon name="bell outline" />
-                <Icon id="circle" corner name="circle" />
-            </Icon.Group>;
-
             return (
                 <Menu.Menu position="right">
                     <Menu.Item>
-                        <Dropdown icon={noNotifications}>
+                        <Dropdown icon='bell outline'>
                             <Dropdown.Menu>
                                 {this.renderNotifications()}
                             </Dropdown.Menu>
@@ -54,20 +52,26 @@ class Header extends Component {
                         </Dropdown>
                     </Menu.Item>
                 </Menu.Menu>
-            )
+            );
         }
     }
 
     renderNotifications() {
-        console.log(this.props.myNotifications);
-
-        if (this.props.myNotifications.notifications.length === 0) {
+        if (!this.props.ready) {
+            return <Loader />
+        } else if (this.props.myNotifications.length === 0) {
             return <Dropdown.Item text="No Notifications" />
         } else {
-            return this.props.myNotifications.notifications.map((notification) => {
-                return <Dropdown.Item icon="bell" text={notification} />
+            return this.props.myNotifications.reverse().map((notification) => {
+                return <NotificationItem notification={notification} onHover={this.onNotificationHover} />
             });
         }
+    }
+
+    onNotificationHover(notificationId) {
+        notificationSeen.call({notificationId}, (err) => {
+            console.log(err);
+        });
     }
 
     facebookLogin() {
@@ -113,7 +117,7 @@ class Header extends Component {
 }
 
 export default withTracker(() => {
-    const handle = Meteor.subscribe('users.notifications-for-me');
+    const handle = Meteor.subscribe('notifications.my-notifications');
     const ready = handle.ready();
     const currentUser = Meteor.user();
     const userName = currentUser && currentUser.profile.name;
@@ -122,9 +126,6 @@ export default withTracker(() => {
         ready,
         currentUser,
         userName,
-        myNotifications: Meteor.users.find(
-            { _id: Meteor.userId() },
-            { fields: { notifications : 1 }}
-        ).fetch()[0]
+        myNotifications: Notifications.find({}).fetch()
     };
 })(Header);

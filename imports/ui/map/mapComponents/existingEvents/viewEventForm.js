@@ -53,6 +53,7 @@ class ViewEventForm extends Component {
                 console.log(err);
             } else {
                 console.log("You're in!");
+                this.props.eventUpdated();
             }
         });
     }
@@ -92,10 +93,10 @@ class ViewEventForm extends Component {
 }
 
 export default withTracker((props) => {
-    const handle = Meteor.subscribe('users.participants-for-event', props.event.eventParticipants);
+    const handle = Meteor.subscribe('users.participants-for-event', props.event);
 
     return {
         ready: handle.ready(),
-        eventParticipants: Meteor.users.find({}).fetch()
+        eventParticipants: Meteor.users.find({ _id: { $in: props.event.eventParticipants }}).fetch()
     };
 })(ViewEventForm);

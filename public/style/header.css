@@ -4,6 +4,6 @@
     margin-bottom: 0;
 }
 
-#circle {
+.active-notification {
     color: red;
 }

@@ -11,12 +11,8 @@ export const newEventAttendee = (event, attendeeId) => {
 
     const notification = `${attendeeName} has signed up for ${event.eventName}`;
 
-    Meteor.users.update({_id: event.owner._id }, {
-        $push: {
-            notifications: {
-                $each: [notification],
-                $slice: -10
-            }
-        }
-    })
+    Notifications.insert({
+        recipient: event.owner._id,
+        content: notification
+    });
 };

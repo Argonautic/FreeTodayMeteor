@@ -1,2 +1,2 @@
 import '../../api/events/events';
-//import '../../api/users/users';
+import '../../api/notifications/notifications';
