@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ac88e271-65e6-4d2b-ad75-f1c4c5c3dc0f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="ac88e271-65e6-4d2b-ad75-f1c4c5c3dc0f" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +14,8 @@
       <file leaf-file-name="map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/imports/ui/map/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+            <state relative-caret-position="513">
+              <caret line="34" column="52" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -184,7 +182,6 @@
         <option value="$PROJECT_DIR$/public/mapStyle.js" />
         <option value="$PROJECT_DIR$/public/mapStyles.js" />
         <option value="$PROJECT_DIR$/public/style/app.css" />
-        <option value="$PROJECT_DIR$/imports/ui/map/map.js" />
         <option value="$PROJECT_DIR$/client/main.css" />
         <option value="$PROJECT_DIR$/imports/ui/app.js" />
         <option value="$PROJECT_DIR$/public/style/map.css" />
@@ -225,6 +222,7 @@
         <option value="$PROJECT_DIR$/imports/api/events/server/publications.js" />
         <option value="$PROJECT_DIR$/imports/api/notifications/server/publications.js" />
         <option value="$PROJECT_DIR$/imports/ui/header/header.js" />
+        <option value="$PROJECT_DIR$/imports/ui/map/map.js" />
       </list>
     </option>
   </component>
@@ -963,8 +961,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/map/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        <state relative-caret-position="513">
+          <caret line="34" column="52" lean-forward="true" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="52" />
           <folding />
         </state>
       </provider>
