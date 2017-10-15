@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { notify } from 'react-notify-toast';
 
-import NewEventForm from './newEventForm';
-
-import EventForm from '../shared/eventForm';
+import UpdateEventForm from '../shared/updateEventForm';
 
 export default class NewEvent extends Component {
     constructor(props) {
@@ -28,7 +26,10 @@ export default class NewEvent extends Component {
         };
 
         const newEventForm = Meteor.userId() ?
-            <EventForm eventLocation={eventLocation} newEventSubmitted={this.newEventSubmitted}/> :
+            <UpdateEventForm
+                isNewEvent
+                eventLocation={eventLocation}
+                newEventSubmitted={this.newEventSubmitted}/> :
             <h3>Login to make a new Event!</h3>;
         render(newEventForm, this.props.eventDOM);
 

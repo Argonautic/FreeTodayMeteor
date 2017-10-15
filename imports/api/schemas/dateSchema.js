@@ -12,7 +12,7 @@ export default dateSchema = new SimpleSchema({
     endDate: {
         type: Date,
         custom: function() {
-            const startDate =  this.field('startDate').value;
+            const startDate =  this.field('eventDates.startDate').value;
             const endDate = this.value;
             const datesValid = startDate >= endDate;
 

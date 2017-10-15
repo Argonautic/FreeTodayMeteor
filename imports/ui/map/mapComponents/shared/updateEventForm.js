@@ -9,12 +9,11 @@ import { updateEvent } from '../../../../api/events/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class EventForm extends Component {
+export default class UpdateEventForm extends Component {
     constructor(props) {
         super(props);
 
-        // This is the hackiest thing I've ever seen. Need to break
-        // up this form even more while maintaining React Form state
+        // Pretty hacky
         const event = props.event || { eventDates: {}};
 
         this.state = {
@@ -22,8 +21,8 @@ export default class EventForm extends Component {
             eventDescription: event.eventDescription || '',
             startDate: moment(event.eventDates.startDate) || '',
             endDate: moment(event.eventDates.endDate) || '',
-            success: false,
-            error: false
+            error: false,
+            errorContent: ''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -32,6 +31,7 @@ export default class EventForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.checkValues = this.checkValues.bind(this);
         this.renderActionButtons = this.renderActionButtons.bind(this);
     }
 
@@ -75,6 +75,7 @@ export default class EventForm extends Component {
             if (err) {
                 console.log(err);
                 console.log(`ERROR(${err.code}): ${err.message}`)
+                this.checkValues();
             } else {
                 this.props.newEventSubmitted();
             }
@@ -94,7 +95,9 @@ export default class EventForm extends Component {
 
         updateEvent.call({eventId: this.props.event._id, updatedEvent}, (err) => {
             if (err) {
-                console.log(`ERROR(${err.code}): ${err.message}`);
+                console.log(err);
+                console.log(`ERROR(${err.code}): ${err.message}`)
+                this.checkValues();
             } else {
                 this.props.eventUpdated('Event Updated!');
             }
@@ -114,15 +117,34 @@ export default class EventForm extends Component {
         });
     }
 
+    checkValues() {
+        const errorMessages = [];
+
+        if (this.state.eventName.length < 3 || this.state.eventName.length > 50) {
+            errorMessages.push(<li>Event Name must be between 3 and 50 characters</li>);
+        } if (this.state.eventDescription.length > 500) {
+            errorMessages.push(<li>Event Description must be under 500 characters</li>);
+        } if (this.state.startDate < new Date()) {
+            errorMessages.push(<li>Start Date must be a valid date</li>)
+        } if (this.state.endDate < this.state.startDate) {
+            errorMessages.push(<li>End Date must be a valid date and after Start Date</li>)
+        }
+
+        this.setState({
+            error: true,
+            errorContent: <ul>{errorMessages}</ul>
+        });
+    }
+
     renderActionButtons() {
-        if (this.props.update) {
+        if (this.props.isNewEvent) {
+            return <Form.Button primary content="Submit" onClick={this.onSubmit} />
+        } else {
             return <Button.Group>
                 <Form.Button primary content="Submit" onClick={this.onUpdate} />
                 <Button.Or />
                 <Button negative onClick={this.onDelete}>Delete</Button>
             </Button.Group>
-        } else {
-            return <Form.Button primary content="Submit" onClick={this.onSubmit} />
         }
     }
 
@@ -142,7 +164,7 @@ export default class EventForm extends Component {
     render() {
         return (
             <div className="editEventWindow">
-                {this.props.update || <h3>New Event</h3>}
+                {this.props.isNewEvent && <h3>New Event</h3>}
                 <Form success={this.state.success} error={this.state.error}>
                     <Form.Field
                         value={this.state.eventName}
@@ -167,28 +189,35 @@ export default class EventForm extends Component {
                         <label>Start Date</label>
                         <DatePicker
                             showTimeSelect
-                            openToDate={this.state.startDate}
                             dateFormat="LLL"
-                            className="startDate"
                             minDate={moment()}
                             maxDate={moment().add(28, 'days')}
                             selected={this.state.startDate}
                             onChange={this.onStartDateChange}
+
+                            popperPlacement="top-end"
+                            popperModifiers={{
+                                    offset: {enabled: false}
+                            }}
                         />
                     </Form.Field>
                     <Form.Field required>
                         <label>End Date</label>
                         <DatePicker
                             showTimeSelect
-                            openToDate={this.state.endDate}
                             dateFormat="LLL"
                             minDate={moment()}
                             maxDate={moment().add(28, 'days')}
                             selected={this.state.endDate}
                             onChange={this.onEndDateChange}
+
+                            popperPlacement="top-end"
+                            popperModifiers={{
+                                    offset: {enabled: false}
+                            }}
                         />
                     </Form.Field>
-                    <Message error header="Form Error" />
+                    {this.state.error && <Message error header="Form Error" content={this.state.errorContent} />}
                     {this.renderActionButtons()}
                 </Form>
             </div>

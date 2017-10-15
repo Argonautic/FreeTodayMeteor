@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Button, Divider } from 'semantic-ui-react';
 
 import ViewEventForm from './viewEventForm';
-import EditEventForm from './editEventForm';
-
-import EventForm from '../shared/eventForm';
+import UpdateEventForm from '../shared/updateEventForm';
 
 export default class ViewEvent extends Component {
     constructor(props) {
@@ -44,16 +42,10 @@ export default class ViewEvent extends Component {
                         event={this.props.event}
                         eventUpdated={this.props.eventUpdated}
                         currentUserId={this.props.currentUserId} /> :
-                    <EventForm
-                        update
+                    <UpdateEventForm
                         marker={this.props.marker}
                         event={this.props.event}
                         eventUpdated={this.props.eventUpdated} />
-                    /*<EditEventForm
-                        marker={this.props.marker}
-                        event={this.props.event}
-                        eventUpdated={this.props.eventUpdated}
-                    />*/
                 }
             </div>
         );

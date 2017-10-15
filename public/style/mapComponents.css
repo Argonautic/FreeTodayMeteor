@@ -20,12 +20,7 @@
 }
 
 ul {
-    padding: 0;
-}
-
-li {
-    padding: 0;
-    width: 80px;
+    padding: 0 !important;
 }
 
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
