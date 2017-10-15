@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import Notifications from 'react-notify-toast';
 
 import MapComponents from './mapComponents/mapComponents'
 import mapStyles from './mapStyles';
@@ -44,6 +45,7 @@ export default class Map extends Component {
             <div id="mapCSSWrapper">
                 <div id="mapContainer" />
                 <div id="mapFinished" />
+                <Notifications />
             </div>
         );
     }

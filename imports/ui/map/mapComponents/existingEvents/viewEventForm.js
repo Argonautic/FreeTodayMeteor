@@ -52,8 +52,7 @@ class ViewEventForm extends Component {
             if (err) {
                 console.log(err);
             } else {
-                console.log("You're in!");
-                this.props.eventUpdated();
+                this.props.eventUpdated("You're In!");
             }
         });
     }

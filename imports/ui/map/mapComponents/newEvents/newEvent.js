@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { notify } from 'react-notify-toast';
 
 import NewEventForm from './newEventForm';
+
+import EventForm from '../shared/eventForm';
 
 export default class NewEvent extends Component {
     constructor(props) {
@@ -15,6 +18,7 @@ export default class NewEvent extends Component {
 
     newEventSubmitted() {
         this.props.eventWindow.close();
+        notify.show('Event Created!', 'success');
     }
 
     createNewEventWindow(event) {
@@ -24,7 +28,7 @@ export default class NewEvent extends Component {
         };
 
         const newEventForm = Meteor.userId() ?
-            <NewEventForm eventLocation={eventLocation} newEventSubmitted={this.newEventSubmitted}/> :
+            <EventForm eventLocation={eventLocation} newEventSubmitted={this.newEventSubmitted}/> :
             <h3>Login to make a new Event!</h3>;
         render(newEventForm, this.props.eventDOM);
 

@@ -106,6 +106,7 @@ export default class NewEventForm extends Component {
                         <label>Start Date</label>
                         <DatePicker
                             showTimeSelect
+                            dateFormat="LLL"
                             className="startDate"
                             minDate={moment()}
                             maxDate={moment().add(28, 'days')}
@@ -117,6 +118,7 @@ export default class NewEventForm extends Component {
                         <label>End Date</label>
                         <DatePicker
                             showTimeSelect
+                            dateFormat="LLL"
                             minDate={moment()}
                             maxDate={moment().add(28, 'days')}
                             selected={this.state.endDate}

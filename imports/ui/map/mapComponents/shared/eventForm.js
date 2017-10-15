@@ -3,31 +3,36 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 
+import { submitNewEvent } from '../../../../api/events/events';
 import { deleteEvent } from '../../../../api/events/events';
 import { updateEvent } from '../../../../api/events/events';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class EditEventForm extends Component {
+export default class EventForm extends Component {
     constructor(props) {
         super(props);
 
+        // This is the hackiest thing I've ever seen. Need to break
+        // up this form even more while maintaining React Form state
+        const event = props.event || { eventDates: {}};
+
         this.state = {
-            eventName: this.props.event.eventName,
-            eventDescription: this.props.event.eventDescription,
-            startDate: moment(this.props.event.startDate),
-            endDate: moment(this.props.event.endDate),
+            eventName: event.eventName || '',
+            eventDescription: event.eventDescription || '',
+            startDate: moment(event.eventDates.startDate) || '',
+            endDate: moment(event.eventDates.endDate) || '',
             success: false,
             error: false
         };
-
-
 
         this.onChange = this.onChange.bind(this);
         this.onStartDateChange = this.onStartDateChange.bind(this);
         this.onEndDateChange = this.onEndDateChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.renderActionButtons = this.renderActionButtons.bind(this);
     }
 
     onChange(event) {
@@ -49,8 +54,34 @@ export default class EditEventForm extends Component {
     }
 
     onSubmit() {
-        console.log('event has been submitted');
+        const coordinates = [this.props.eventLocation.lng, this.props.eventLocation.lat];
 
+        const newEvent = {
+            owner: Meteor.user(),
+            eventName: this.state.eventName,
+            eventDescription: this.state.eventDescription,
+            eventDates: {
+                startDate: moment(this.state.startDate).toDate(),
+                endDate: moment(this.state.endDate).toDate(),
+            },
+            eventLocation: {
+                location: {
+                    coordinates
+                }
+            }
+        };
+
+        submitNewEvent.call(newEvent, (err) => {
+            if (err) {
+                console.log(err);
+                console.log(`ERROR(${err.code}): ${err.message}`)
+            } else {
+                this.props.newEventSubmitted();
+            }
+        });
+    }
+
+    onUpdate() {
         const updatedEvent = {
             eventName: this.state.eventName,
             eventDescription: this.state.eventDescription,
@@ -83,16 +114,35 @@ export default class EditEventForm extends Component {
         });
     }
 
+    renderActionButtons() {
+        if (this.props.update) {
+            return <Button.Group>
+                <Form.Button primary content="Submit" onClick={this.onUpdate} />
+                <Button.Or />
+                <Button negative onClick={this.onDelete}>Delete</Button>
+            </Button.Group>
+        } else {
+            return <Form.Button primary content="Submit" onClick={this.onSubmit} />
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
+        const event = nextProps.event || { eventDates: {} };
+
         this.setState({
-            eventName: nextProps.event.eventName,
-            eventDescription: nextProps.event.eventDescription
+            eventName: event.eventName || '',
+            eventDescription: event.eventDescription || '',
+            startDate: moment(event.eventDates.startDate) || '',
+            endDate: moment(event.eventDates.endDate) || '',
+            success: false,
+            error: false
         })
     }
 
     render() {
         return (
             <div className="editEventWindow">
+                {this.props.update || <h3>New Event</h3>}
                 <Form success={this.state.success} error={this.state.error}>
                     <Form.Field
                         value={this.state.eventName}
@@ -139,11 +189,7 @@ export default class EditEventForm extends Component {
                         />
                     </Form.Field>
                     <Message error header="Form Error" />
-                    <Button.Group>
-                        <Form.Button primary content="Submit" onClick={this.onSubmit} />
-                        <Button.Or />
-                        <Button negative onClick={this.onDelete}>Delete</Button>
-                    </Button.Group>
+                    {this.renderActionButtons()}
                 </Form>
             </div>
         );

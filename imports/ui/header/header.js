@@ -63,7 +63,7 @@ class Header extends Component {
             return <Dropdown.Item text="No Notifications" />
         } else {
             return this.props.myNotifications.reverse().map((notification) => {
-                return <NotificationItem notification={notification} onHover={this.onNotificationHover} />
+                return <NotificationItem key={notification._id} notification={notification} onHover={this.onNotificationHover} />
             });
         }
     }

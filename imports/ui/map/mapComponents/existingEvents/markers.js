@@ -1,6 +1,7 @@
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { notify } from 'react-notify-toast';
 
 import ViewEvent from './viewEvent';
 
@@ -13,8 +14,9 @@ class Markers extends Component {
         this.eventUpdated = this.eventUpdated.bind(this);
     }
 
-    eventUpdated() {
+    eventUpdated(message) {
         this.props.eventWindow.close();
+        notify.show(message, message === 'Event Deleted' ? 'warning' : 'success');
     }
 
     render() {
